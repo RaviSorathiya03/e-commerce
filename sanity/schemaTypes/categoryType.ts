@@ -1,0 +1,36 @@
+import {TagIcon} from '@sanity/icons'
+import { title } from 'process'
+import {defineField, defineType} from 'sanity'
+
+export const categoryType = defineType({
+  name: 'category',
+  title: 'Category',
+  type: 'document',
+  icon: TagIcon,
+  fields: [
+    defineField({
+      name: 'title',
+      type: 'string',
+      validation: (Rule) => Rule.required(), // Added validation
+    }),
+    defineField({
+      name: 'slug',
+      type: 'slug',
+      options: {
+        source: 'title',
+      },
+      validation: (Rule) => Rule.required(), // Added validation
+    }),
+    defineField({
+      name: 'description',
+      type: 'text',
+    }),
+  ],
+
+  preview: {
+    select: {
+      title: 'title', 
+      subtitle: "description"
+    }
+  }
+})
